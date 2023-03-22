@@ -2,7 +2,7 @@
 apiVersion: karpenter.k8s.aws/v1alpha1
 kind: AWSNodeTemplate
 metadata:
-  name: karpenter-riker
+  name: karpenter-default
   labels:
     {{- toYaml .Values.labels | nindent 4 }}  
 spec:
@@ -52,7 +52,7 @@ spec:
   consolidation:
     enabled: true
   providerRef:
-    name: karpenter-riker
+    name: karpenter-default
 
   ttlSecondsUntilExpired: 2592000 # 30 Days = 60 * 60 * 24 * 30 Seconds;
   
@@ -64,8 +64,8 @@ spec:
     resources:
       cpu: '2k'
   labels:
-    billing-team: default
-    team: default
+    billing-team: riker
+    team: riker
     type: karpenter
     
   # Do we want to apply some taints on the nodes ?  
