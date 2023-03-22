@@ -44,7 +44,7 @@ spec:
       terminationGracePeriodSeconds: 30
       {{ if .Values.spec.karpenterInstanceProfile }}
       nodeSelector:
-        team: default
+        team: riker
         type: karpenter
       tolerations:
         - key: 'karpenter'

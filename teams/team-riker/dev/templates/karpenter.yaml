@@ -2,7 +2,7 @@
 apiVersion: karpenter.k8s.aws/v1alpha1
 kind: AWSNodeTemplate
 metadata:
-  name: karpenter-default
+  name: karpenter-riker
   labels:
     {{- toYaml .Values.labels | nindent 4 }}  
 spec:
@@ -14,7 +14,7 @@ spec:
     aws:eks:cluster-name: '{{ .Values.spec.clusterName }}' # Choose only security groups of nodes
   tags:
     karpenter.sh/cluster_name: {{.Values.spec.clusterName}}
-    karpenter.sh/provisioner: default
+    karpenter.sh/provisioner: riker
   metadataOptions:
     httpEndpoint: enabled
     httpProtocolIPv6: disabled
@@ -24,7 +24,7 @@ spec:
 apiVersion: karpenter.sh/v1alpha5
 kind: Provisioner
 metadata:
-  name: default
+  name: riker
   labels:
     {{- toYaml .Values.labels | nindent 4 }}
 spec:
@@ -52,7 +52,7 @@ spec:
   consolidation:
     enabled: true
   providerRef:
-    name: karpenter-default
+    name: karpenter-riker
 
   ttlSecondsUntilExpired: 2592000 # 30 Days = 60 * 60 * 24 * 30 Seconds;
   
